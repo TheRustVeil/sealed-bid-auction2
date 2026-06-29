@@ -88,10 +88,10 @@ export function FeaturesSection() {
     <section className="relative z-10 px-6 py-24">
       <div className="max-w-6xl mx-auto">
         {/* Heading */}
-        <div className="text-center mb-16">
-          <p className="text-xs text-violet-400 uppercase tracking-[0.2em] font-semibold mb-3">Protocol properties</p>
-          <h2 className="text-4xl font-bold text-white mb-4">Built different</h2>
-          <p className="text-white/35 text-[15px] max-w-lg mx-auto leading-relaxed">
+        <div className="mb-16 max-w-3xl">
+          <p className="text-[11px] font-mono uppercase tracking-[0.3em] text-white/40 mb-5">[ 01 ] Protocol properties</p>
+          <h2 className="text-[clamp(2rem,4.5vw,3.5rem)] font-black uppercase tracking-[-0.02em] leading-[0.95] text-white mb-5">Built different</h2>
+          <p className="text-white/40 text-[15px] max-w-lg leading-relaxed">
             Six guarantees that make ConfidentialDrop the only honest token distribution protocol.
           </p>
         </div>
@@ -101,23 +101,21 @@ export function FeaturesSection() {
           {FEATURES.map((f, i) => (
             <div
               key={f.title}
-              className={`group relative p-6 rounded-2xl border border-white/[0.06] bg-panel/50 backdrop-blur-sm transition-all duration-700 hover:-translate-y-1 cursor-default ${f.border}`}
+              className="group relative p-6 rounded-2xl border border-white/[0.06] bg-panel/50 backdrop-blur-sm transition-all duration-700 hover:-translate-y-1 hover:border-white/20 cursor-default"
               style={{
                 opacity: inView ? 1 : 0,
                 transform: inView ? 'translateY(0)' : 'translateY(24px)',
                 transitionDelay: `${i * 80}ms`,
                 transitionProperty: 'opacity, transform, border-color, box-shadow',
               }}
-              onMouseEnter={e => { e.currentTarget.style.boxShadow = `0 8px 32px ${f.glow}`; }}
+              onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 8px 32px rgba(0,0,0,0.5)'; }}
               onMouseLeave={e => { e.currentTarget.style.boxShadow = 'none'; }}
             >
               {/* Top accent */}
-              <div
-                className={`absolute top-0 left-6 right-6 h-px bg-gradient-to-r ${f.gradient} opacity-0 group-hover:opacity-100 transition-opacity rounded-full`}
-              />
+              <div className="absolute top-0 left-6 right-6 h-px bg-white/40 opacity-0 group-hover:opacity-100 transition-opacity rounded-full" />
 
               {/* Icon */}
-              <div className={`w-11 h-11 rounded-xl bg-gradient-to-br ${f.gradient} flex items-center justify-center mb-5 shadow-lg group-hover:scale-105 transition-transform`}>
+              <div className="w-11 h-11 rounded-xl bg-white/[0.06] border border-white/10 text-white/80 flex items-center justify-center mb-5 group-hover:scale-105 group-hover:text-white transition-all">
                 {f.icon}
               </div>
 

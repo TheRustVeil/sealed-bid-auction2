@@ -70,10 +70,10 @@ export function FAQSection() {
     <section className="relative z-10 px-6 py-24">
       <div className="max-w-3xl mx-auto">
         {/* Heading */}
-        <div className="text-center mb-14">
-          <p className="text-xs text-violet-400 uppercase tracking-[0.2em] font-semibold mb-3">FAQ</p>
-          <h2 className="text-4xl font-bold text-white mb-4">Questions & answers</h2>
-          <p className="text-white/35 text-[15px]">Everything you need to know before deploying your first auction.</p>
+        <div className="mb-14">
+          <p className="text-[11px] font-mono uppercase tracking-[0.3em] text-white/40 mb-5">[ 06 ] FAQ</p>
+          <h2 className="text-[clamp(2rem,4.5vw,3.5rem)] font-black uppercase tracking-[-0.02em] leading-[0.95] text-white mb-5">Questions &amp; answers</h2>
+          <p className="text-white/40 text-[15px]">Everything you need to know before deploying your first auction.</p>
         </div>
 
         {/* Accordion */}

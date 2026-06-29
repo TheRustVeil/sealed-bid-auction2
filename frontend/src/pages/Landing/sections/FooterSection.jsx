@@ -83,25 +83,21 @@ export function FooterSection() {
         {/* CTA band */}
         <div
           className="rounded-3xl p-px mb-16"
-          style={{ background: 'linear-gradient(135deg, rgba(124,58,237,0.4), rgba(6,182,212,0.2), rgba(124,58,237,0.1))' }}
+          style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.18), rgba(255,255,255,0.04), rgba(255,255,255,0.01))' }}
         >
           <div
             className="rounded-3xl px-5 py-8 sm:px-10 sm:py-12 text-center"
-            style={{ background: 'linear-gradient(135deg, rgba(124,58,237,0.06) 0%, rgba(13,13,31,0.95) 60%)' }}
+            style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(10,10,10,0.95) 60%)' }}
           >
-            <h2 className="text-3xl font-bold text-white mb-3">Ready to deploy?</h2>
+            <h2 className="text-[clamp(2rem,5vw,4rem)] font-black uppercase tracking-[-0.02em] leading-[0.95] text-white mb-4">Ready to deploy?</h2>
             <p className="text-white/40 text-sm mb-8 max-w-md mx-auto">
               No backend, no trusted party. Deploy your first sealed-bid auction in minutes on Sepolia.
             </p>
             <button
               onClick={() => navigate('/operator')}
-              className="inline-flex items-center gap-3 px-7 py-3.5 rounded-xl font-semibold text-sm text-white transition-all hover:-translate-y-0.5"
-              style={{
-                background: 'linear-gradient(135deg, #7C3AED, #6D28D9)',
-                boxShadow: '0 0 0 1px rgba(124,58,237,0.4), 0 8px 24px rgba(124,58,237,0.2)',
-              }}
+              className="group inline-flex items-center gap-3 px-8 py-4 rounded-full font-semibold text-sm uppercase tracking-[0.15em] text-black bg-white hover:bg-white/90 transition-all hover:-translate-y-0.5"
             >
-              Launch Auction <ArrowRight />
+              Launch Auction <span className="transition-transform group-hover:translate-x-1"><ArrowRight /></span>
             </button>
           </div>
         </div>
@@ -111,10 +107,7 @@ export function FooterSection() {
           {/* Brand */}
           <div className="col-span-2">
             <div className="flex items-center gap-2 mb-4">
-              <div
-                className="w-7 h-7 rounded-lg flex items-center justify-center"
-                style={{ background: 'linear-gradient(135deg, #7C3AED, #06B6D4)' }}
-              >
+              <div className="w-7 h-7 rounded-lg flex items-center justify-center bg-white text-black">
                 <BoltIcon />
               </div>
               <span className="font-bold text-[15px] tracking-tight">ConfidentialDrop</span>
@@ -183,21 +176,17 @@ export function FooterSection() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@protocol.xyz"
-                className="flex-1 md:w-60 bg-white/[0.04] border border-white/8 rounded-xl px-4 py-2.5 text-sm text-white placeholder-white/20 focus:outline-none focus:border-violet-500/50 transition-all"
+                className="flex-1 md:w-60 bg-white/[0.04] border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white placeholder-white/20 focus:outline-none focus:border-white/40 transition-all"
               />
               <button
                 type="submit"
-                className="px-4 py-2.5 rounded-xl text-sm font-semibold text-white transition-all hover:-translate-y-px flex-shrink-0"
-                style={{
-                  background: 'linear-gradient(135deg, #7C3AED, #6D28D9)',
-                  boxShadow: '0 0 0 1px rgba(124,58,237,0.35)',
-                }}
+                className="px-4 py-2.5 rounded-xl text-sm font-semibold text-black bg-white hover:bg-white/90 transition-all hover:-translate-y-px flex-shrink-0"
               >
                 Subscribe
               </button>
             </form>
           ) : (
-            <p className="text-emerald-400 text-sm font-medium">✓ You're subscribed!</p>
+            <p className="text-white text-sm font-medium">✓ You're subscribed!</p>
           )}
         </div>
 

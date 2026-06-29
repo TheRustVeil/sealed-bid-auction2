@@ -6,9 +6,9 @@ const TABS = ['Operator', 'Recipient', 'Settlement'];
 /* ─── Mini operator dashboard mockup ─── */
 function OperatorMockup() {
   const rows = [
-    { label: 'Seed Round 2024', count: 450, status: 'settled', color: 'text-emerald-400', dot: 'bg-emerald-400' },
-    { label: 'Team Allocation',  count: 23,  status: 'pending', color: 'text-yellow-400', dot: 'bg-yellow-400' },
-    { label: 'Community Drop',   count: 1204, status: 'settled', color: 'text-emerald-400', dot: 'bg-emerald-400' },
+    { label: 'Seed Round 2024', count: 450, status: 'settled' },
+    { label: 'Team Allocation',  count: 23,  status: 'pending' },
+    { label: 'Community Drop',   count: 1204, status: 'settled' },
   ];
 
   return (
@@ -16,12 +16,12 @@ function OperatorMockup() {
       {/* Stats bar */}
       <div className="grid grid-cols-3 gap-2 mb-4">
         {[
-          { v: '3', l: 'Total', c: 'text-violet-300' },
-          { v: '2', l: 'Settled', c: 'text-emerald-300' },
-          { v: '1,677', l: 'Recipients', c: 'text-cyan-300' },
-        ].map(({ v, l, c }) => (
-          <div key={l} className="rounded-xl border border-white/[0.06] bg-surface/60 px-3 py-2.5 text-center">
-            <div className={`text-lg font-black ${c}`}>{v}</div>
+          { v: '3', l: 'Total' },
+          { v: '2', l: 'Settled' },
+          { v: '1,677', l: 'Recipients' },
+        ].map(({ v, l }) => (
+          <div key={l} className="rounded-xl border border-white/[0.06] bg-white/[0.02] px-3 py-2.5 text-center">
+            <div className="text-lg font-black text-white">{v}</div>
             <div className="text-white/30 text-[10px] uppercase tracking-wider">{l}</div>
           </div>
         ))}
@@ -29,9 +29,9 @@ function OperatorMockup() {
 
       {/* Distribution rows */}
       {rows.map((r) => (
-        <div key={r.label} className="flex items-center justify-between px-4 py-3 rounded-xl border border-white/[0.06] bg-surface/50 hover:border-violet-500/20 transition-colors cursor-pointer">
+        <div key={r.label} className="flex items-center justify-between px-4 py-3 rounded-xl border border-white/[0.06] bg-white/[0.02] hover:border-white/20 transition-colors cursor-pointer">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-violet-500/15 border border-violet-500/20 flex items-center justify-center text-violet-300 font-bold text-[11px]">
+            <div className="w-8 h-8 rounded-lg bg-white/[0.06] border border-white/12 flex items-center justify-center text-white/80 font-bold text-[11px]">
               {r.label[0]}
             </div>
             <div>
@@ -40,8 +40,8 @@ function OperatorMockup() {
             </div>
           </div>
           <div className="flex items-center gap-1.5">
-            <span className={`w-1.5 h-1.5 rounded-full ${r.dot}`} />
-            <span className={`text-[10px] font-medium ${r.color}`}>{r.status}</span>
+            <span className={`w-1.5 h-1.5 rounded-full ${r.status === 'settled' ? 'bg-white/70' : 'bg-white/30'}`} />
+            <span className={`text-[10px] font-medium ${r.status === 'settled' ? 'text-white/70' : 'text-white/40'}`}>{r.status}</span>
           </div>
         </div>
       ))}
@@ -56,19 +56,15 @@ function RecipientMockup() {
   return (
     <div className="space-y-3">
       {/* Input */}
-      <div className="rounded-xl border border-white/[0.06] bg-surface/60 px-4 py-3">
+      <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] px-4 py-3">
         <div className="text-white/30 text-[10px] uppercase tracking-wider mb-2">Distribution ID</div>
-        <div className="text-violet-400 font-mono text-[11px]">0x3c4d8f2a…9e1b</div>
+        <div className="text-white/80 font-mono text-[11px]">0x3c4d8f2a…9e1b</div>
       </div>
 
       {/* Decrypt button */}
       <button
         onClick={() => setRevealed(true)}
-        className="w-full py-2.5 rounded-xl text-[11px] font-semibold text-white transition-all hover:-translate-y-px"
-        style={{
-          background: 'linear-gradient(135deg, #7C3AED, #6D28D9)',
-          boxShadow: '0 0 0 1px rgba(124,58,237,0.35)',
-        }}
+        className="w-full py-2.5 rounded-xl text-[11px] font-semibold text-black bg-white hover:bg-white/90 transition-all hover:-translate-y-px"
       >
         Decrypt My Allocation
       </button>
@@ -77,15 +73,15 @@ function RecipientMockup() {
       <div
         className="rounded-xl border px-4 py-3 transition-all duration-500"
         style={{
-          borderColor: revealed ? 'rgba(16,185,129,0.3)' : 'rgba(255,255,255,0.06)',
-          background: revealed ? 'rgba(16,185,129,0.05)' : 'rgba(5,5,17,0.6)',
+          borderColor: revealed ? 'rgba(255,255,255,0.25)' : 'rgba(255,255,255,0.06)',
+          background: revealed ? 'rgba(255,255,255,0.04)' : 'rgba(255,255,255,0.01)',
         }}
       >
         {!revealed ? (
           <div className="text-white/20 text-[11px] font-mono">Awaiting decryption…</div>
         ) : (
           <div className="space-y-1.5">
-            <div className="text-emerald-400 text-[10px] font-semibold uppercase tracking-wider">✓ Decrypted</div>
+            <div className="text-white/60 text-[10px] font-semibold uppercase tracking-wider">✓ Decrypted</div>
             <div className="text-white text-xl font-black">200 USDC</div>
             <div className="text-white/30 text-[10px]">Only you can see this amount</div>
           </div>
@@ -103,19 +99,19 @@ function SettlementMockup() {
     { label: 'Recipients',   value: '450',          mono: false },
     { label: 'Total Tokens', value: '91,250 USDC', mono: false },
     { label: 'FHE Proof',    value: '0xab34…11c0', mono: true },
-    { label: 'Status',       value: 'Verified ✓',  mono: false, green: true },
+    { label: 'Status',       value: 'Verified ✓',  mono: false, strong: true },
   ];
 
   return (
     <div className="space-y-2">
-      <div className="text-emerald-400 text-[11px] font-semibold uppercase tracking-wider mb-3 flex items-center gap-2">
-        <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+      <div className="text-white/70 text-[11px] font-semibold uppercase tracking-wider mb-3 flex items-center gap-2">
+        <span className="w-2 h-2 rounded-full bg-white/70 animate-pulse" />
         Settlement Confirmed
       </div>
       {rows.map((r) => (
-        <div key={r.label} className="flex items-center justify-between px-3 py-2 rounded-lg border border-white/[0.05] bg-surface/40">
+        <div key={r.label} className="flex items-center justify-between px-3 py-2 rounded-lg border border-white/[0.05] bg-white/[0.015]">
           <span className="text-white/35 text-[10px]">{r.label}</span>
-          <span className={`text-[10px] ${r.mono ? 'font-mono text-violet-400' : r.green ? 'text-emerald-400 font-semibold' : 'text-white/70'}`}>
+          <span className={`text-[10px] ${r.mono ? 'font-mono text-white/60' : r.strong ? 'text-white font-semibold' : 'text-white/70'}`}>
             {r.value}
           </span>
         </div>
@@ -136,6 +132,24 @@ const TAB_DESC = {
   Settlement: 'Every settlement publishes a verifiable on-chain proof. Anyone can verify fairness without seeing bids.',
 };
 
+const TAB_BULLETS = {
+  Operator: [
+    'Upload CSV of recipients & bid amounts',
+    'Deploy in one click — no backend needed',
+    'Monitor settlement status in real-time',
+  ],
+  Recipient: [
+    'No account, no signup — just your wallet',
+    'Your allocation is decrypted client-side',
+    'Verify the proof yourself on-chain',
+  ],
+  Settlement: [
+    'FHE co-processor decrypts on-chain',
+    'Tamper-proof settlement hash pinned',
+    'Any wallet can audit fairness',
+  ],
+};
+
 export function ShowcaseSection() {
   const [active, setActive] = useState('Operator');
   const [ref, inView] = useInView(0.1);
@@ -144,10 +158,10 @@ export function ShowcaseSection() {
     <section className="relative z-10 px-6 py-24">
       <div className="max-w-6xl mx-auto">
         {/* Heading */}
-        <div className="text-center mb-14">
-          <p className="text-xs text-violet-400 uppercase tracking-[0.2em] font-semibold mb-3">Product</p>
-          <h2 className="text-4xl font-bold text-white mb-4">See it in action</h2>
-          <p className="text-white/35 text-[15px] max-w-md mx-auto">
+        <div className="mb-14 max-w-3xl">
+          <p className="text-[11px] font-mono uppercase tracking-[0.3em] text-white/40 mb-5">[ 04 ] Product</p>
+          <h2 className="text-[clamp(2rem,4.5vw,3.5rem)] font-black uppercase tracking-[-0.02em] leading-[0.95] text-white mb-5">See it in action</h2>
+          <p className="text-white/40 text-[15px] max-w-md">
             Three views — operator, recipient, and settlement — all powered by a single smart contract.
           </p>
         </div>
@@ -164,16 +178,16 @@ export function ShowcaseSection() {
           {/* Left: description + tabs */}
           <div>
             {/* Tabs */}
-            <div className="flex gap-1 p-1 rounded-xl border border-white/[0.06] bg-white/[0.03] w-fit mb-8">
+            <div className="flex gap-1 p-1 rounded-xl border border-white/[0.06] bg-white/[0.02] w-fit mb-8">
               {TABS.map((t) => (
                 <button
                   key={t}
                   onClick={() => setActive(t)}
                   className="px-4 py-2 rounded-lg text-sm font-medium transition-all"
                   style={active === t ? {
-                    background: 'linear-gradient(135deg, rgba(124,58,237,0.4), rgba(124,58,237,0.2))',
+                    background: 'rgba(255,255,255,0.10)',
                     color: 'white',
-                    boxShadow: '0 0 0 1px rgba(124,58,237,0.3)',
+                    boxShadow: '0 0 0 1px rgba(255,255,255,0.14)',
                   } : {
                     color: 'rgba(255,255,255,0.4)',
                   }}
@@ -186,33 +200,9 @@ export function ShowcaseSection() {
             <p className="text-white/50 text-[15px] leading-relaxed mb-8">{TAB_DESC[active]}</p>
 
             <ul className="space-y-3">
-              {active === 'Operator' && [
-                'Upload CSV of recipients & bid amounts',
-                'Deploy in one click — no backend needed',
-                'Monitor settlement status in real-time',
-              ].map((t) => (
+              {TAB_BULLETS[active].map((t) => (
                 <li key={t} className="flex items-start gap-3 text-sm text-white/55">
-                  <span className="mt-0.5 w-5 h-5 rounded-full bg-violet-500/15 border border-violet-500/25 flex items-center justify-center text-violet-400 flex-shrink-0 text-[10px]">✓</span>
-                  {t}
-                </li>
-              ))}
-              {active === 'Recipient' && [
-                'No account, no signup — just your wallet',
-                'Your allocation is decrypted client-side',
-                'Verify the proof yourself on-chain',
-              ].map((t) => (
-                <li key={t} className="flex items-start gap-3 text-sm text-white/55">
-                  <span className="mt-0.5 w-5 h-5 rounded-full bg-cyan-500/15 border border-cyan-500/25 flex items-center justify-center text-cyan-400 flex-shrink-0 text-[10px]">✓</span>
-                  {t}
-                </li>
-              ))}
-              {active === 'Settlement' && [
-                'FHE co-processor decrypts on-chain',
-                'Tamper-proof settlement hash pinned',
-                'Any wallet can audit fairness',
-              ].map((t) => (
-                <li key={t} className="flex items-start gap-3 text-sm text-white/55">
-                  <span className="mt-0.5 w-5 h-5 rounded-full bg-emerald-500/15 border border-emerald-500/25 flex items-center justify-center text-emerald-400 flex-shrink-0 text-[10px]">✓</span>
+                  <span className="mt-0.5 w-5 h-5 rounded-full bg-white/[0.06] border border-white/12 flex items-center justify-center text-white/80 flex-shrink-0 text-[10px]">✓</span>
                   {t}
                 </li>
               ))}
@@ -223,14 +213,14 @@ export function ShowcaseSection() {
           <div className="relative">
             <div
               className="absolute inset-0 -m-6 pointer-events-none"
-              style={{ background: 'radial-gradient(ellipse, rgba(124,58,237,0.08) 0%, transparent 70%)' }}
+              style={{ background: 'radial-gradient(ellipse, rgba(255,255,255,0.04) 0%, transparent 70%)' }}
             />
-            <div className="relative rounded-2xl border border-white/[0.08] bg-panel/70 backdrop-blur-xl overflow-hidden shadow-2xl shadow-black/40">
+            <div className="relative rounded-2xl border border-white/[0.08] bg-panel/80 backdrop-blur-xl overflow-hidden shadow-2xl shadow-black/60">
               {/* Chrome */}
-              <div className="flex items-center gap-2 px-4 py-3 border-b border-white/[0.06] bg-surface/60">
-                <span className="w-2.5 h-2.5 rounded-full bg-red-400/50" />
-                <span className="w-2.5 h-2.5 rounded-full bg-yellow-400/50" />
-                <span className="w-2.5 h-2.5 rounded-full bg-emerald-400/50" />
+              <div className="flex items-center gap-2 px-4 py-3 border-b border-white/[0.06] bg-white/[0.02]">
+                <span className="w-2.5 h-2.5 rounded-full bg-white/15" />
+                <span className="w-2.5 h-2.5 rounded-full bg-white/15" />
+                <span className="w-2.5 h-2.5 rounded-full bg-white/15" />
                 <span className="ml-3 text-white/25 text-xs font-mono">
                   confidential-drop / {active.toLowerCase()}
                 </span>

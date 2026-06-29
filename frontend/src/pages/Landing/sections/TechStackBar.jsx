@@ -100,8 +100,8 @@ export function TechStackBar() {
     <section className="relative z-10 px-6 py-12">
       <div className="max-w-6xl mx-auto">
         {/* Label */}
-        <p className="text-center text-xs text-white/20 uppercase tracking-[0.25em] font-semibold mb-8">
-          Built on battle-tested infrastructure
+        <p className="text-center text-[11px] text-white/30 font-mono uppercase tracking-[0.35em] mb-8">
+          — Built on —
         </p>
 
         {/* Stack chips */}
@@ -112,17 +112,15 @@ export function TechStackBar() {
           {STACK.map((s, i) => (
             <div
               key={s.name}
-              className="flex items-center gap-2.5 px-4 py-2.5 rounded-2xl transition-all duration-700 cursor-default"
+              className="flex items-center gap-2.5 px-4 py-2.5 rounded-2xl border border-white/[0.07] bg-white/[0.02] hover:border-white/15 transition-all duration-700 cursor-default"
               style={{
-                border: `1px solid ${s.border}`,
-                background: s.bg,
                 opacity: inView ? 1 : 0,
                 transform: inView ? 'translateY(0)' : 'translateY(12px)',
                 transitionDelay: `${i * 70}ms`,
-                transitionProperty: 'opacity, transform',
+                transitionProperty: 'opacity, transform, border-color',
               }}
             >
-              {s.icon}
+              <span style={{ filter: 'grayscale(1) opacity(0.7)' }}>{s.icon}</span>
               <div>
                 <div className="text-white font-semibold text-[12px] leading-tight">{s.name}</div>
                 <div className="text-white/30 text-[10px] leading-tight">{s.sub}</div>
@@ -133,19 +131,10 @@ export function TechStackBar() {
 
         {/* Zama attribution bar */}
         <div className="mt-8 flex justify-center">
-          <div
-            className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-2xl"
-            style={{
-              background: 'linear-gradient(135deg, rgba(124,58,237,0.12), rgba(6,182,212,0.08))',
-              border: '1px solid rgba(124,58,237,0.25)',
-            }}
-          >
-            <span className="w-1.5 h-1.5 rounded-full bg-violet-400 animate-pulse" />
+          <div className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-2xl border border-white/[0.08] bg-white/[0.02]">
+            <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
             <span className="text-white/50 text-xs">Powered by</span>
-            <span
-              className="text-sm font-bold tracking-wide"
-              style={{ background: 'linear-gradient(135deg, #a78bfa, #22d3ee)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}
-            >
+            <span className="text-sm font-bold tracking-wide text-white">
               Zama fhEVM + @fhevm/solidity@0.11
             </span>
             <span className="text-white/20 text-xs">·</span>

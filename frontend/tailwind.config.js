@@ -5,12 +5,17 @@ export default {
     extend: {
       colors: {
         confidential: {
-          DEFAULT: "#7C3AED",
+          DEFAULT: "#8B5CF6",
           light: "#EDE9FE",
-          dark: "#5B21B6",
+          dark: "#6D28D9",
         },
-        surface: "#050511",
-        panel: "#0D0D1F",
+        indigo: {
+          DEFAULT: "#6366F1",
+          dark: "#4338CA",
+        },
+        surface: "#000000",
+        panel: "#0A0A0A",
+        accent: "#8B5CF6",
       },
       borderRadius: {
         chip: "9999px",

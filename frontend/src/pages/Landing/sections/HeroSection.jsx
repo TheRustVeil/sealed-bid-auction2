@@ -1,6 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense, lazy } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+
+const Raven3D = lazy(() => import('../../../components/ui/Raven3D'));
 
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 32 },
@@ -21,17 +23,17 @@ const CheckIcon = () => (
 );
 
 const BIDS = [
-  { addr: '0x1a2b…9f0e', color: 'text-violet-400' },
-  { addr: '0x3c4d…1a2b', color: 'text-cyan-400' },
-  { addr: '0x5e6f…3c4d', color: 'text-emerald-400' },
-  { addr: '0x7g8h…5e6f', color: 'text-orange-400' },
+  { addr: '0x1a2b…9f0e' },
+  { addr: '0x3c4d…1a2b' },
+  { addr: '0x5e6f…3c4d' },
+  { addr: '0x7g8h…5e6f' },
 ];
 
 const SETTLED = [
-  { addr: '0x1a2b…9f0e', amount: '150 USDC', color: 'text-violet-400' },
-  { addr: '0x3c4d…1a2b', amount: '200 USDC', color: 'text-cyan-400' },
-  { addr: '0x5e6f…3c4d', amount: '175 USDC', color: 'text-emerald-400' },
-  { addr: '0x7g8h…5e6f', amount: '125 USDC', color: 'text-orange-400' },
+  { addr: '0x1a2b…9f0e', amount: '150 USDC' },
+  { addr: '0x3c4d…1a2b', amount: '200 USDC' },
+  { addr: '0x5e6f…3c4d', amount: '175 USDC' },
+  { addr: '0x7g8h…5e6f', amount: '125 USDC' },
 ];
 
 /* Cycles through: collecting → settling → complete → reset */
@@ -45,16 +47,16 @@ function AuctionTerminal() {
   }, [phase]);
 
   return (
-    <div className="rounded-2xl border border-white/[0.08] bg-panel/70 backdrop-blur-xl overflow-hidden shadow-2xl shadow-black/40">
+    <div className="rounded-2xl border border-white/[0.08] bg-panel/80 backdrop-blur-xl overflow-hidden shadow-2xl shadow-black/60">
       {/* Window chrome */}
-      <div className="flex items-center gap-2 px-4 py-3 border-b border-white/[0.06] bg-surface/60">
-        <span className="w-3 h-3 rounded-full bg-red-400/50" />
-        <span className="w-3 h-3 rounded-full bg-yellow-400/50" />
-        <span className="w-3 h-3 rounded-full bg-emerald-400/50" />
+      <div className="flex items-center gap-2 px-4 py-3 border-b border-white/[0.06] bg-white/[0.02]">
+        <span className="w-3 h-3 rounded-full bg-white/15" />
+        <span className="w-3 h-3 rounded-full bg-white/15" />
+        <span className="w-3 h-3 rounded-full bg-white/15" />
         <span className="ml-3 text-white/25 text-xs font-mono">confidential-drop — settlement</span>
         <span className="ml-auto flex items-center gap-1.5">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-          <span className="text-emerald-400/70 text-[10px] font-mono">live</span>
+          <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+          <span className="text-white/40 text-[10px] font-mono">live</span>
         </span>
       </div>
 
@@ -62,24 +64,24 @@ function AuctionTerminal() {
       <div className="px-4 py-4 font-mono text-xs space-y-2 min-h-[220px]">
         <div className="text-white/30">
           {'> '}<span className="text-white/60">Contract:</span>{' '}
-          <span className="text-violet-400">0x3C4D…DISPERSE</span>
+          <span className="text-white/80">0x3C4D…DISPERSE</span>
         </div>
         <div className="text-white/30">
           {'> '}<span className="text-white/60">Token:</span>{' '}
-          <span className="text-cyan-400">0x705F…USDC</span>
+          <span className="text-white/80">0x705F…USDC</span>
         </div>
-        <div className="mt-3 text-white/20">─────────────────────────────</div>
+        <div className="mt-3 text-white/15">─────────────────────────────</div>
 
         {phase === 0 && (
           <div className="space-y-2">
-            <div className="text-yellow-400/70 flex items-center gap-2">
-              <span className="animate-pulse">◉</span> Collecting encrypted bids…
+            <div className="text-white/60 flex items-center gap-2">
+              <span className="animate-pulse text-accent">◉</span> Collecting encrypted bids…
             </div>
             {BIDS.map((b, i) => (
               <div key={b.addr} className="flex items-center justify-between gap-4 opacity-0"
                 style={{ animation: `fadeIn 0.4s ease ${i * 0.15}s forwards` }}>
-                <span className={b.color}>{b.addr}</span>
-                <span className="text-white/20 bg-white/5 rounded px-2 py-0.5 border border-white/8">
+                <span className="text-white/70">{b.addr}</span>
+                <span className="text-white/30 bg-white/5 rounded px-2 py-0.5 border border-white/8">
                   [ENCRYPTED]
                 </span>
               </div>
@@ -89,16 +91,16 @@ function AuctionTerminal() {
 
         {phase === 1 && (
           <div className="space-y-3">
-            <div className="text-violet-400/80 flex items-center gap-2">
+            <div className="text-white/70 flex items-center gap-2">
               <span
-                className="inline-block w-3 h-3 border-2 border-violet-400 border-t-transparent rounded-full"
+                className="inline-block w-3 h-3 border-2 border-accent border-t-transparent rounded-full"
                 style={{ animation: 'spin 0.8s linear infinite' }}
               />
               TFHE co-processor decrypting…
             </div>
             <div className="h-1.5 bg-white/5 rounded-full overflow-hidden">
               <div
-                className="h-full bg-gradient-to-r from-violet-500 to-cyan-500 rounded-full"
+                className="h-full bg-white/70 rounded-full"
                 style={{ animation: 'progressBar 1.1s ease-in forwards' }}
               />
             </div>
@@ -108,14 +110,14 @@ function AuctionTerminal() {
 
         {phase === 2 && (
           <div className="space-y-2">
-            <div className="text-emerald-400 flex items-center gap-2 font-semibold">
+            <div className="text-white flex items-center gap-2 font-semibold">
               <CheckIcon /> Settlement complete
             </div>
             {SETTLED.map((b, i) => (
               <div key={b.addr} className="flex items-center justify-between gap-4 opacity-0"
                 style={{ animation: `fadeIn 0.35s ease ${i * 0.12}s forwards` }}>
-                <span className={b.color}>{b.addr}</span>
-                <span className="text-white/70">→ <span className="text-white font-semibold">{b.amount}</span></span>
+                <span className="text-white/70">{b.addr}</span>
+                <span className="text-white/50">→ <span className="text-white font-semibold">{b.amount}</span></span>
                 <CheckIcon />
               </div>
             ))}
@@ -131,161 +133,64 @@ export function HeroSection() {
   const navigate = useNavigate();
 
   return (
-    <section className="relative z-10 pt-20 pb-16 px-6">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* ── Left: copy ── */}
-          <div>
-            {/* Badge row */}
-            <motion.div {...fadeUp(0)} className="flex flex-wrap items-center gap-2 mb-8">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-chip border border-violet-500/30 bg-violet-500/10 text-violet-300 text-xs font-medium backdrop-blur-sm">
-                <span className="w-1.5 h-1.5 rounded-full bg-violet-400 animate-pulse" />
-                Sealed-Bid Auction Protocol
-              </div>
-              <div
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-chip text-xs font-semibold"
-                style={{
-                  background: 'linear-gradient(135deg, rgba(124,58,237,0.18), rgba(6,182,212,0.12))',
-                  border: '1px solid rgba(124,58,237,0.35)',
-                  color: '#c4b5fd',
-                }}
-              >
-                <svg viewBox="0 0 16 16" fill="none" className="w-3 h-3">
-                  <path d="M3 8h10M8 3v10" stroke="#a78bfa" strokeWidth="2" strokeLinecap="round" />
-                  <circle cx="8" cy="8" r="6.5" stroke="#a78bfa" strokeWidth="1" />
-                </svg>
-                Built on Zama fhEVM
-              </div>
-            </motion.div>
-
-            {/* Headline */}
-            <h1 className="text-[clamp(2.8rem,6vw,5rem)] font-black tracking-tight leading-[1.05] mb-6">
-              <motion.span {...fadeUp(0.1)} className="block text-white">Private Bids.</motion.span>
-              <motion.span
-                {...fadeUp(0.2)}
-                className="block"
-                style={{
-                  background: 'linear-gradient(135deg, #a78bfa 0%, #818cf8 40%, #22d3ee 100%)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
-                }}
-              >
-                Fair Prices.
-              </motion.span>
-              <motion.span {...fadeUp(0.3)} className="block text-white">Zero Knowledge.</motion.span>
-            </h1>
-
-            <motion.p {...fadeUp(0.4)} className="text-[17px] text-white/45 leading-relaxed mb-8 max-w-lg">
-              The first token distribution protocol where every winner pays their exact private bid —
-              {' '}<span className="text-white/75 font-medium">
-                encrypted end-to-end with Zama TFHE. Bids are computed inside the EVM — no one ever sees what others paid.
-              </span>
-            </motion.p>
-
-            {/* Trust points */}
-            <motion.div {...fadeUp(0.5)} className="flex flex-col gap-2 mb-10">
-              {[
-                'Bids encrypted client-side before submission',
-                'Operator never sees plaintext amounts',
-                'Settlement proven on-chain via FHE',
-              ].map((p) => (
-                <div key={p} className="flex items-center gap-2.5 text-sm text-white/50">
-                  <span className="w-5 h-5 rounded-full bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400 flex-shrink-0">
-                    <CheckIcon />
-                  </span>
-                  {p}
-                </div>
-              ))}
-            </motion.div>
-
-            {/* CTAs */}
-            <motion.div {...fadeUp(0.6)} className="flex flex-wrap gap-3">
-              <button
-                onClick={() => navigate('/operator')}
-                className="group flex items-center gap-3 px-7 py-3.5 rounded-xl font-semibold text-sm text-white transition-all hover:-translate-y-0.5"
-                style={{
-                  background: 'linear-gradient(135deg, #7C3AED, #6D28D9)',
-                  boxShadow: '0 0 0 1px rgba(124,58,237,0.4), 0 8px 24px rgba(124,58,237,0.25)',
-                }}
-                onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 0 0 1px rgba(124,58,237,0.6), 0 12px 32px rgba(124,58,237,0.4)'; }}
-                onMouseLeave={e => { e.currentTarget.style.boxShadow = '0 0 0 1px rgba(124,58,237,0.4), 0 8px 24px rgba(124,58,237,0.25)'; }}
-              >
-                Launch Auction
-                <span className="w-6 h-6 rounded-lg bg-white/15 flex items-center justify-center group-hover:translate-x-0.5 transition-transform">
-                  <ArrowRight />
-                </span>
-              </button>
-
-              <button
-                onClick={() => navigate('/recipient')}
-                className="group flex items-center gap-2.5 px-7 py-3.5 rounded-xl font-semibold text-sm text-white/65 border border-white/10 bg-white/[0.04] hover:border-cyan-500/40 hover:bg-cyan-500/5 hover:text-white transition-all hover:-translate-y-0.5"
-              >
-                Check My Allocation
-                <span className="group-hover:translate-x-0.5 transition-transform opacity-60 group-hover:opacity-100">
-                  <ArrowRight />
-                </span>
-              </button>
-            </motion.div>
-
-            {/* Social proof */}
-            <motion.div {...fadeUp(0.7)} className="flex items-center gap-3 mt-8">
-              <div className="flex -space-x-2">
-                {['V', 'S', 'K', 'M'].map((l, i) => (
-                  <div
-                    key={l}
-                    className="w-7 h-7 rounded-full border-2 border-surface flex items-center justify-center text-[10px] font-bold text-white"
-                    style={{
-                      background: ['#7C3AED','#06B6D4','#10B981','#F59E0B'][i],
-                    }}
-                  >
-                    {l}
-                  </div>
-                ))}
-              </div>
-              <p className="text-white/30 text-xs">
-                Trusted by <span className="text-white/60 font-semibold">50+</span> Web3 teams
-              </p>
-            </motion.div>
-          </div>
-
-          {/* ── Right: animated terminal ── */}
-          <motion.div
-            className="relative"
-            initial={{ opacity: 0, x: 40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
-          >
-            <div
-              className="absolute inset-0 -m-8 pointer-events-none"
-              style={{ background: 'radial-gradient(ellipse at center, rgba(124,58,237,0.12) 0%, transparent 70%)' }}
-            />
-            <div className="relative animate-float">
-              <AuctionTerminal />
-            </div>
-            {/* Floating stat chips */}
-            <motion.div
-              className="absolute -bottom-4 -left-4 flex items-center gap-2 px-3 py-2 rounded-xl border border-white/10 bg-panel/90 backdrop-blur text-xs shadow-xl"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.9, duration: 0.4, ease: 'backOut' }}
-              style={{ animation: 'float 5s ease-in-out 0.9s infinite' }}
-            >
-              <span className="w-2 h-2 rounded-full bg-emerald-400" />
-              <span className="text-white/60">0 bids exposed</span>
-            </motion.div>
-            <motion.div
-              className="absolute -top-4 -right-4 flex items-center gap-2 px-3 py-2 rounded-xl border border-white/10 bg-panel/90 backdrop-blur text-xs shadow-xl"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 1.1, duration: 0.4, ease: 'backOut' }}
-              style={{ animation: 'float 7s ease-in-out 1.1s infinite' }}
-            >
-              <span className="text-violet-400 font-mono font-bold">TFHE</span>
-              <span className="text-white/40">encrypted</span>
-            </motion.div>
-          </motion.div>
+    <section className="relative z-10 min-h-screen flex flex-col justify-center px-6 pt-32 pb-16 overflow-hidden">
+      <div className="max-w-[1400px] mx-auto w-full relative">
+        {/* 3D low-poly raven — hero centerpiece */}
+        <div className="hidden md:block absolute right-[-6%] top-[44%] -translate-y-1/2 w-[58%] h-[150%] z-0">
+          <Suspense fallback={null}>
+            <Raven3D />
+          </Suspense>
         </div>
+
+        {/* Foreground content */}
+        <div className="relative z-10">
+        {/* Eyebrow */}
+        <motion.div {...fadeUp(0)} className="flex items-center gap-3 mb-10">
+          <span className="text-[11px] font-mono uppercase tracking-[0.35em] text-white/40">
+            [ Sealed-Bid Auction Protocol ]
+          </span>
+          <span className="h-px flex-1 max-w-[120px] bg-white/15" />
+          <span className="inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.2em] text-white/40">
+            <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" /> Built on Zama fhEVM
+          </span>
+        </motion.div>
+
+        {/* Giant uppercase tagline — Raven signature */}
+        <h1 className="font-black uppercase tracking-[-0.03em] leading-[0.92] text-[clamp(2.8rem,9vw,8rem)] mb-10">
+          <motion.span {...fadeUp(0.08)} className="block text-white">Private Bids.</motion.span>
+          <motion.span {...fadeUp(0.16)} className="block text-outline">Fair Prices.</motion.span>
+          <motion.span {...fadeUp(0.24)} className="block text-white">Zero Knowledge.</motion.span>
+        </h1>
+
+        {/* Subtext — Raven cadence */}
+        <motion.p {...fadeUp(0.34)} className="text-[clamp(1rem,1.6vw,1.35rem)] text-white/45 max-w-2xl mb-12 leading-relaxed">
+          Confidential token distribution. Institutional-grade privacy, sealed end-to-end with
+          Zama TFHE — every winner pays their exact private bid, and no one ever sees what others paid.
+        </motion.p>
+
+        {/* CTAs — arrow links */}
+        <motion.div {...fadeUp(0.42)} className="flex flex-wrap items-center gap-4 mb-20">
+          <button
+            onClick={() => navigate('/operator')}
+            className="group inline-flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.15em] text-black bg-white px-8 py-4 rounded-full transition-all hover:bg-white/90 hover:-translate-y-0.5"
+          >
+            Launch Auction
+            <span className="transition-transform group-hover:translate-x-1"><ArrowRight /></span>
+          </button>
+          <button
+            onClick={() => navigate('/recipient')}
+            className="group inline-flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.15em] text-white/70 hover:text-white px-2 py-4 transition-colors"
+          >
+            Check My Allocation
+            <span className="transition-transform group-hover:translate-x-1"><ArrowRight /></span>
+          </button>
+        </motion.div>
+
+        {/* Scroll hint */}
+        <motion.div {...fadeUp(0.5)} className="flex items-center gap-3 text-white/35 text-xs font-mono uppercase tracking-[0.25em] mt-16">
+          <span className="inline-block animate-bounce">↓</span> Scroll to learn more…
+        </motion.div>
+        </div>{/* /foreground content */}
       </div>
     </section>
   );

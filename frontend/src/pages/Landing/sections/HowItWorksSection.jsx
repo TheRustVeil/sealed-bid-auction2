@@ -29,92 +29,80 @@ const STEPS = [
   {
     n: '01',
     key: 'encrypt',
-    gradient: 'from-violet-500 to-purple-600',
-    hex: '#7C3AED',
-    glow: 'rgba(124,58,237,0.18)',
-    border: 'border-violet-500/30',
-    bg: 'bg-violet-500/8',
+    hex: '#ffffff',
+    glow: 'rgba(255,255,255,0.08)',
     tag: 'CLIENT-SIDE',
-    tagStyle: { color: '#a78bfa', background: 'rgba(124,58,237,0.12)', border: '1px solid rgba(124,58,237,0.25)' },
+    tagStyle: { color: 'rgba(255,255,255,0.7)', background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.14)' },
     title: 'Seal Your Bid',
     desc: 'Zama SDK encrypts your bid directly in the browser using TFHE. The plaintext amount never leaves your device — only a ciphertext is submitted on-chain.',
     icon: <LockIcon />,
     visual: {
       lines: [
-        { label: 'bid_amount',   val: '200 USDC',       style: 'text-white/70' },
-        { label: 'ciphertext',   val: '0xae3f…d1c8',    style: 'text-violet-400 font-mono' },
-        { label: 'proof',        val: '0x00…verified',  style: 'text-violet-300/70 font-mono' },
+        { label: 'bid_amount',   val: '200 USDC',       style: 'text-white/80' },
+        { label: 'ciphertext',   val: '0xae3f…d1c8',    style: 'text-white/60 font-mono' },
+        { label: 'proof',        val: '0x00…verified',  style: 'text-white/45 font-mono' },
       ],
-      status: { text: 'Encrypted', color: '#a78bfa' },
+      status: { text: 'Encrypted', color: '#ffffff' },
       code: "instance.createEncryptedInput(addr, user)\n  .add64(bidAmount)\n  .encrypt()",
     },
   },
   {
     n: '02',
     key: 'submit',
-    gradient: 'from-cyan-500 to-teal-500',
-    hex: '#06B6D4',
-    glow: 'rgba(6,182,212,0.15)',
-    border: 'border-cyan-500/30',
-    bg: 'bg-cyan-500/8',
+    hex: '#ffffff',
+    glow: 'rgba(255,255,255,0.08)',
     tag: 'ON-CHAIN',
-    tagStyle: { color: '#22d3ee', background: 'rgba(6,182,212,0.10)', border: '1px solid rgba(6,182,212,0.25)' },
+    tagStyle: { color: 'rgba(255,255,255,0.7)', background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.14)' },
     title: 'Submit Ciphertext',
     desc: 'The encrypted bid is sent to the ConfidentialDisperse smart contract. The operator sees only a ciphertext — they can never learn the bid amount.',
     icon: <ChainIcon />,
     visual: {
       lines: [
-        { label: 'contract',     val: '0x3C4D…DROP',    style: 'text-cyan-400 font-mono' },
+        { label: 'contract',     val: '0x3C4D…DROP',    style: 'text-white/60 font-mono' },
         { label: 'from',         val: '0x1a2b…9f0e',    style: 'text-white/60 font-mono' },
-        { label: 'bid_handle',   val: 'euint64(0xae3f…)',style: 'text-cyan-300/70 font-mono' },
+        { label: 'bid_handle',   val: 'euint64(0xae3f…)',style: 'text-white/45 font-mono' },
       ],
-      status: { text: 'Tx confirmed', color: '#22d3ee' },
+      status: { text: 'Tx confirmed', color: '#ffffff' },
       code: "disperse.addRecipient(\n  recipientAddr,\n  handles[0],   // euint64\n  inputProof\n)",
     },
   },
   {
     n: '03',
     key: 'fhe',
-    gradient: 'from-orange-500 to-amber-500',
-    hex: '#F97316',
-    glow: 'rgba(249,115,22,0.15)',
-    border: 'border-orange-500/30',
-    bg: 'bg-orange-500/8',
+    hex: '#ffffff',
+    glow: 'rgba(255,255,255,0.08)',
     tag: 'FHE CO-PROCESSOR',
-    tagStyle: { color: '#fb923c', background: 'rgba(249,115,22,0.10)', border: '1px solid rgba(249,115,22,0.25)' },
+    tagStyle: { color: 'rgba(255,255,255,0.7)', background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.14)' },
     title: 'On-chain Settlement',
     desc: "The Zama FHE co-processor decrypts all bids inside the EVM, computes each winner's allocation at their sealed price, and posts a KMS-signed proof on-chain.",
     icon: <CpuIcon />,
     visual: {
       lines: [
-        { label: 'mode',         val: 'publicDecrypt',  style: 'text-orange-400' },
-        { label: 'kms_proof',    val: '0xfe12…8a3b',   style: 'text-orange-300/70 font-mono' },
+        { label: 'mode',         val: 'publicDecrypt',  style: 'text-white/80' },
+        { label: 'kms_proof',    val: '0xfe12…8a3b',   style: 'text-white/45 font-mono' },
         { label: 'gas_used',     val: '~840,000',       style: 'text-white/60' },
       ],
-      status: { text: 'Settlement complete', color: '#fb923c' },
+      status: { text: 'Settlement complete', color: '#ffffff' },
       code: "disperse.executeDistribution(\n  distId,          // bytes32\n  handles,         // euint64[]\n  inputProofs      // bytes[]\n)",
     },
   },
   {
     n: '04',
     key: 'claim',
-    gradient: 'from-emerald-500 to-green-500',
-    hex: '#10B981',
-    glow: 'rgba(16,185,129,0.15)',
-    border: 'border-emerald-500/30',
-    bg: 'bg-emerald-500/8',
+    hex: '#ffffff',
+    glow: 'rgba(255,255,255,0.08)',
     tag: 'RECIPIENT',
-    tagStyle: { color: '#34d399', background: 'rgba(16,185,129,0.10)', border: '1px solid rgba(16,185,129,0.25)' },
+    tagStyle: { color: 'rgba(255,255,255,0.7)', background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.14)' },
     title: 'Claim with Proof',
     desc: 'Recipients decrypt their allocation off-chain using the Zama relayer SDK, then submit the cleartext + KMS proof on-chain. The contract verifies and transfers tokens.',
     icon: <ShieldIcon />,
     visual: {
       lines: [
-        { label: 'decrypted',    val: '200 USDC',       style: 'text-emerald-400' },
-        { label: 'proof_valid',  val: 'EIP-712 ✓',      style: 'text-emerald-300/70' },
+        { label: 'decrypted',    val: '200 USDC',       style: 'text-white/80' },
+        { label: 'proof_valid',  val: 'EIP-712 ✓',      style: 'text-white/60' },
         { label: 'status',       val: 'Tokens sent ✓',  style: 'text-white' },
       ],
-      status: { text: 'Claimed', color: '#34d399' },
+      status: { text: 'Claimed', color: '#ffffff' },
       code: "const { abiEncoded, proof } =\n  await instance.publicDecrypt([handle])\n\ndisperse.claim(distId, abiEncoded, proof)",
     },
   },
@@ -133,9 +121,9 @@ function VisualPanel({ step }) {
     >
       {/* Window chrome */}
       <div className="flex items-center gap-2 px-4 py-3 border-b border-white/[0.06] bg-surface/60">
-        <span className="w-2.5 h-2.5 rounded-full bg-red-400/50" />
-        <span className="w-2.5 h-2.5 rounded-full bg-yellow-400/50" />
-        <span className="w-2.5 h-2.5 rounded-full bg-emerald-400/50" />
+        <span className="w-2.5 h-2.5 rounded-full bg-white/15" />
+        <span className="w-2.5 h-2.5 rounded-full bg-white/15" />
+        <span className="w-2.5 h-2.5 rounded-full bg-white/15" />
         <span className="ml-3 text-white/25 text-[11px] font-mono">step-{step.n} / {step.key}</span>
         <span className="ml-auto flex items-center gap-1.5">
           <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: step.hex }} />
@@ -198,15 +186,13 @@ export function HowItWorksSection() {
       <div className="max-w-6xl mx-auto">
 
         {/* ── Heading ── */}
-        <div className="text-center mb-16">
-          <p className="text-xs text-violet-400 uppercase tracking-[0.2em] font-semibold mb-3">Protocol flow</p>
-          <h2 className="text-4xl font-bold text-white mb-4">
-            Four steps.{' '}
-            <span style={{ background: 'linear-gradient(135deg, #a78bfa, #22d3ee)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
-              Zero trust required.
-            </span>
+        <div className="mb-16 max-w-3xl">
+          <p className="text-[11px] font-mono uppercase tracking-[0.3em] text-white/40 mb-5">[ 02 ] Protocol flow</p>
+          <h2 className="text-[clamp(2rem,4.5vw,3.5rem)] font-black uppercase tracking-[-0.02em] leading-[0.95] mb-5">
+            <span className="text-white">Four steps. </span>
+            <span className="text-outline">Zero trust required.</span>
           </h2>
-          <p className="text-white/35 text-[15px] max-w-lg mx-auto leading-relaxed">
+          <p className="text-white/40 text-[15px] max-w-lg leading-relaxed">
             From encrypted bid submission to on-chain settlement — no plaintext ever exposed,
             no trusted third party involved.
           </p>
@@ -226,10 +212,7 @@ export function HowItWorksSection() {
                 style={active === i ? { background: s.glow, border: `1px solid ${s.hex}44` } : { border: '1px solid transparent' }}
               >
                 {/* Number + icon */}
-                <div
-                  className="shrink-0 w-12 h-12 rounded-2xl flex items-center justify-center text-white shadow-lg transition-transform group-hover:scale-105"
-                  style={{ background: `linear-gradient(135deg, ${s.hex}, ${s.hex}99)` }}
-                >
+                <div className="shrink-0 w-12 h-12 rounded-2xl flex items-center justify-center text-white/80 border border-white/12 bg-white/[0.06] transition-transform group-hover:scale-105">
                   {s.icon}
                 </div>
 
@@ -309,8 +292,7 @@ export function HowItWorksSection() {
               {active < STEPS.length - 1 && (
                 <button
                   onClick={() => setActive(active + 1)}
-                  className="px-4 py-2 rounded-xl text-sm font-medium text-white transition-all"
-                  style={{ background: `linear-gradient(135deg, ${step.hex}, ${step.hex}cc)`, boxShadow: `0 0 0 1px ${step.hex}44` }}
+                  className="px-4 py-2 rounded-xl text-sm font-medium text-black bg-white hover:bg-white/90 transition-all"
                 >
                   Next step →
                 </button>
@@ -318,7 +300,7 @@ export function HowItWorksSection() {
               {active === STEPS.length - 1 && (
                 <button
                   onClick={() => setActive(0)}
-                  className="px-4 py-2 rounded-xl text-sm font-medium text-white/50 border border-white/10 hover:border-violet-500/30 hover:text-white/80 transition-all"
+                  className="px-4 py-2 rounded-xl text-sm font-medium text-white/50 border border-white/10 hover:border-white/25 hover:text-white/80 transition-all"
                 >
                   ↺ Restart
                 </button>

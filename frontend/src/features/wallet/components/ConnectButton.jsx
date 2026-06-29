@@ -32,7 +32,7 @@ export function ConnectButton() {
         className="flex items-center gap-2 px-3.5 py-2 rounded-xl border border-white/10 bg-white/[0.04] text-white/70 hover:text-white hover:border-white/20 transition-all text-xs font-medium"
         style={{ display: isConnected ? undefined : 'none' }}
       >
-        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 flex-shrink-0" />
+        <span className="w-1.5 h-1.5 rounded-full bg-white flex-shrink-0" />
         <span>{address ? truncate(address) : '…'}</span>
       </button>
 
@@ -42,12 +42,8 @@ export function ConnectButton() {
         disabled={isConnecting}
         tabIndex={isConnected ? -1 : 0}
         aria-hidden={isConnected}
-        className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold text-white disabled:opacity-60 transition-all hover:-translate-y-px"
-        style={{
-          display: isConnected ? 'none' : undefined,
-          background: 'linear-gradient(135deg, #7C3AED, #6D28D9)',
-          boxShadow: '0 0 0 1px rgba(124,58,237,0.4), 0 4px 12px rgba(124,58,237,0.2)',
-        }}
+        className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold uppercase tracking-[0.12em] text-black bg-white hover:bg-white/90 disabled:opacity-60 transition-all hover:-translate-y-px"
+        style={{ display: isConnected ? 'none' : undefined }}
       >
         {isConnecting && <SpinnerMini />}
         <span>{isConnecting ? 'Connecting…' : 'Connect Wallet'}</span>

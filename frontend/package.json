@@ -15,6 +15,7 @@
     "test:e2e:ui": "playwright test --ui"
   },
   "dependencies": {
+    "@react-three/fiber": "^9.6.1",
     "@tanstack/react-query": "^5.101.0",
     "@tokenops/sdk": "^1.0.0",
     "@wagmi/connectors": "^8.0.15",
@@ -26,6 +27,7 @@
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
     "react-router-dom": "^7.17.0",
+    "three": "^0.185.0",
     "viem": "^2.52.2",
     "wagmi": "^3.6.16"
   },

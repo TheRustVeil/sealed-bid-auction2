@@ -26,17 +26,18 @@ const CDLogo = ({ small }) => (
     {/* Hover glow */}
     <div
       className="absolute -inset-2 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl pointer-events-none"
-      style={{ background: 'radial-gradient(circle, rgba(124,58,237,0.55) 0%, rgba(6,182,212,0.25) 65%, transparent 85%)' }}
+      style={{ background: 'radial-gradient(circle, rgba(255,255,255,0.30) 0%, transparent 80%)' }}
     />
 
     {/* Glass tile */}
     <div
       className={`relative rounded-2xl flex items-center justify-center overflow-hidden transition-all duration-300 ${small ? 'w-9 h-9' : 'w-16 h-16'}`}
       style={{
-        background: 'linear-gradient(150deg, rgba(124,58,237,0.18) 0%, rgba(13,13,31,0.70) 55%, rgba(6,182,212,0.12) 100%)',
+        background: 'linear-gradient(150deg, rgba(255,255,255,0.08) 0%, rgba(10,10,10,0.75) 55%, rgba(255,255,255,0.04) 100%)',
         border: '1px solid rgba(255,255,255,0.16)',
-        boxShadow: '0 10px 40px rgba(124,58,237,0.30), 0 2px 8px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.18)',
+        boxShadow: '0 10px 40px rgba(0,0,0,0.5), 0 2px 8px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.18)',
         backdropFilter: 'blur(20px)',
+        filter: 'grayscale(1)',
       }}
     >
       <div className="absolute top-0 left-4 right-4 h-px bg-gradient-to-r from-transparent via-white/55 to-transparent" />
@@ -128,7 +129,7 @@ export function Navbar({ back }) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed top-0 inset-x-0 h-px z-[51] pointer-events-none"
-            style={{ background: 'linear-gradient(90deg, transparent 5%, rgba(124,58,237,0.55) 30%, rgba(6,182,212,0.45) 70%, transparent 95%)' }}
+            style={{ background: 'linear-gradient(90deg, transparent 5%, rgba(255,255,255,0.25) 50%, transparent 95%)' }}
           />
         )}
       </AnimatePresence>
@@ -161,17 +162,17 @@ export function Navbar({ back }) {
         className="fixed z-50"
         style={{
           background: scrolled
-            ? 'rgba(13,13,31,0.82)'
-            : 'linear-gradient(180deg, rgba(13,13,31,0.88) 0%, rgba(13,13,31,0.75) 100%)',
-          backdropFilter: 'blur(28px) saturate(180%)',
-          WebkitBackdropFilter: 'blur(28px) saturate(180%)',
+            ? 'rgba(10,10,10,0.82)'
+            : 'linear-gradient(180deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.65) 100%)',
+          backdropFilter: 'blur(28px) saturate(120%)',
+          WebkitBackdropFilter: 'blur(28px) saturate(120%)',
           border: scrolled
-            ? '1px solid rgba(167,139,250,0.18)'
+            ? '1px solid rgba(255,255,255,0.12)'
             : '0px solid transparent',
           borderBottom: scrolled ? undefined : '1px solid rgba(255,255,255,0.07)',
           boxShadow: scrolled
-            ? '0 4px 40px rgba(124,58,237,0.22), 0 1px 0 rgba(255,255,255,0.06), 0 20px 60px rgba(0,0,0,0.5)'
-            : '0 1px 0 rgba(124,58,237,0.08), 0 4px 24px rgba(0,0,0,0.25)',
+            ? '0 20px 60px rgba(0,0,0,0.6), 0 1px 0 rgba(255,255,255,0.06)'
+            : '0 4px 24px rgba(0,0,0,0.3)',
           transition: 'background 0.35s, box-shadow 0.35s, border 0.35s',
         }}
       >
@@ -206,12 +207,7 @@ export function Navbar({ back }) {
                     exit={{ opacity: 0, x: -6 }}
                     transition={{ duration: 0.2 }}
                     className="hidden sm:block font-black text-[15px] tracking-tight"
-                    style={{
-                      background: 'linear-gradient(135deg, #ffffff 30%, #c4b5fd 65%, #67e8f9 100%)',
-                      WebkitBackgroundClip: 'text',
-                      WebkitTextFillColor: 'transparent',
-                      backgroundClip: 'text',
-                    }}
+                    style={{ color: '#ffffff' }}
                   >
                     ConfidentialDrop
                   </motion.span>
@@ -237,7 +233,7 @@ export function Navbar({ back }) {
                       ConfidentialDrop
                     </span>
                     <div className="flex items-center gap-1.5">
-                      <span className="w-1 h-1 rounded-full bg-violet-400" />
+                      <span className="w-1 h-1 rounded-full bg-accent" />
                       <span className="text-[10px] font-semibold text-white/30 tracking-[0.18em] uppercase">
                         FHE Auction Protocol
                       </span>
@@ -267,8 +263,8 @@ export function Navbar({ back }) {
                             layoutId="nav-pill"
                             className="absolute inset-0 rounded-xl"
                             style={{
-                              background: 'linear-gradient(135deg, rgba(124,58,237,0.22), rgba(124,58,237,0.08))',
-                              border: '1px solid rgba(124,58,237,0.28)',
+                              background: 'rgba(255,255,255,0.08)',
+                              border: '1px solid rgba(255,255,255,0.16)',
                             }}
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
@@ -313,7 +309,7 @@ export function Navbar({ back }) {
               className={({ isActive }) =>
                 [
                   'px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-all flex-shrink-0',
-                  isActive ? 'text-white bg-violet-500/15 border border-violet-500/25' : 'text-white/40 hover:text-white/70',
+                  isActive ? 'text-white bg-white/10 border border-white/15' : 'text-white/40 hover:text-white/70',
                 ].join(' ')
               }
             >

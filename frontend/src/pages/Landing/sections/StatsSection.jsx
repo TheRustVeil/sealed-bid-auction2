@@ -16,15 +16,7 @@ function Counter({ target, prefix = '', suffix = '', label, sub, decimals }) {
 
   return (
     <div ref={ref} className="text-center px-6">
-      <div
-        className="text-5xl sm:text-6xl font-black mb-2 tabular-nums"
-        style={{
-          background: 'linear-gradient(135deg, #a78bfa 0%, #22d3ee 100%)',
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
-          backgroundClip: 'text',
-        }}
-      >
+      <div className="text-5xl sm:text-6xl font-black mb-2 tabular-nums text-white">
         {display}
       </div>
       <div className="text-white font-semibold text-sm mb-1">{label}</div>
@@ -40,19 +32,19 @@ export function StatsSection() {
       <div
         className="max-w-6xl mx-auto rounded-3xl py-14 px-6 relative overflow-hidden"
         style={{
-          background: 'linear-gradient(135deg, rgba(124,58,237,0.08) 0%, rgba(6,182,212,0.05) 100%)',
-          border: '1px solid rgba(124,58,237,0.15)',
+          background: 'rgba(255,255,255,0.02)',
+          border: '1px solid rgba(255,255,255,0.08)',
         }}
       >
         {/* bg orb */}
         <div
           className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[200px] pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse, rgba(124,58,237,0.1) 0%, transparent 70%)' }}
+          style={{ background: 'radial-gradient(ellipse, rgba(255,255,255,0.05) 0%, transparent 70%)' }}
         />
 
-        <div className="text-center mb-12 relative z-10">
-          <p className="text-xs text-cyan-400 uppercase tracking-[0.2em] font-semibold mb-2">By the numbers</p>
-          <h2 className="text-3xl font-bold text-white">Protocol at a glance</h2>
+        <div className="mb-12 relative z-10">
+          <p className="text-[11px] font-mono uppercase tracking-[0.3em] text-white/40 mb-4">[ 03 ] By the numbers</p>
+          <h2 className="text-[clamp(1.8rem,4vw,3rem)] font-black uppercase tracking-[-0.02em] leading-[0.95] text-white">Protocol at a glance</h2>
         </div>
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 relative z-10">
